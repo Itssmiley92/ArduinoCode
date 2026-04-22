@@ -12,8 +12,8 @@
 #include <Servo.h>
 
 // Variables
-int const joyPinX = A0;
-int const joyPinY = A1;
+const int joyPinX = A0;
+const int joyPinY = A1;
 int joyValX;
 int joyValY;
 int angleX;
@@ -24,6 +24,7 @@ Servo servoX; // servo used for x-axis on joystick
 Servo servoY; // servo used for y-axis on joystick
 
 void setup() {
+  Serial.begin(9600);
   servoX.attach(5); // attach servoX to pin 5
   servoY.attach(6); // attach servoY to pin 6
 }
@@ -31,7 +32,10 @@ void setup() {
 void loop() {
   joyValX = analogRead(joyPinX); // reads the Joystick X axis value
   joyValY = analogRead(joyPinY); // reads the Joystick Y axis value
-  
+  Serial.print(joyValX);
+  Serial.print(" | ");
+  Serial.print(joyValY);
+  Serial.println();
   angleX = map(joyValX, 0, 1023, 0, 179); // scale the numbers from the X value
   angleY = map(joyValY, 0, 1023, 0, 179); // scale the numbers from the Y value
 
